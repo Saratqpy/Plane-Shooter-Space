@@ -8,9 +8,21 @@ public class PlayetController : MonoBehaviour
 
     public float min_Y , max_Y; 
 
+    [SerializeField]
+    private GameObject player_Bullet;
+
+    [SerializeField]
+    private Transform attack_Point;
+
+    public float attack_Timer = 0.35f;
+    private float current_Attack_Timer;
+    private bool canAttack;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        current_Attack_Timer = attack_Timer;
         
     }
 
@@ -18,6 +30,7 @@ public class PlayetController : MonoBehaviour
     void Update()
     {
       MovePlayer();  
+      Attack();
     }
 
     void MovePlayer()
@@ -44,6 +57,22 @@ public class PlayetController : MonoBehaviour
                 temp.y = min_Y;
             } 
             transform.position = temp;
+        }
+    }
+
+    void Attack() {
+        attack_Timer += Time.deltaTime;
+        if(attack_Timer > current_Attack_Timer){
+            canAttack = true;
+        }
+
+        if(Input.GetKeyDown(KeyCode.K)){
+            if(canAttack){
+                canAttack = false;
+                attack_Timer = 0f;
+
+                Instantiate(player_Bullet,attack_Point.position,Quaternion.identity);
+            }
         }
     }
 }
