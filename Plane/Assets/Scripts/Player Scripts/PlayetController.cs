@@ -8,6 +8,8 @@ public class PlayetController : MonoBehaviour
 
     public float min_Y , max_Y; 
 
+    public Score_Script score;
+
     [SerializeField]
     private GameObject player_Bullet;
 
@@ -79,6 +81,12 @@ public class PlayetController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.tag == "Enemies"){
             Time.timeScale = 0;
+        }
+
+        if(collision.gameObject.tag == "coin"){
+            score.score += 10;
+            Destroy(collision.gameObject);
+            
         }
     }
 }
