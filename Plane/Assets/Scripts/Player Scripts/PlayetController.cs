@@ -9,6 +9,7 @@ public class PlayetController : MonoBehaviour
     public float min_Y , max_Y; 
 
     public Score_Script score;
+    public GameObject gameOverPanel;
 
     [SerializeField]
     private GameObject player_Bullet;
@@ -24,7 +25,10 @@ public class PlayetController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOverPanel.SetActive(false); 
         current_Attack_Timer = attack_Timer;
+        Time.timeScale = 1;
+
         
     }
 
@@ -81,6 +85,8 @@ public class PlayetController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.gameObject.tag == "Enemies"){
             Time.timeScale = 0;
+
+            gameOverPanel.SetActive(true);
         }
 
         if(collision.gameObject.tag == "coin"){

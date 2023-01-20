@@ -41,7 +41,7 @@ public class Score_Script : MonoBehaviour
     IEnumerator Score(){
         while(true){
             yield return new WaitForSeconds(2);
-            score = score + 1;
+            score = score + 1; 
            // lastScore = score;
             
         }
